@@ -93,7 +93,7 @@
   @keyframes crownBounce { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-4px) rotate(5deg); } }
   .pulse-dot { display: inline-block; width: 8px; height: 8px; background: var(--green); border-radius: 50%; margin-right: 6px; animation: pulseDot 2s infinite; }
   @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
-  .week-selector select { background: var(--dark2); border: 1px solid rgba(255,255,255,0.1); color: var(--text); padding: 5px 10px; border-radius: 6px; font-family: 'Outfit', sans-serif; font-size: 13px; outline: none; cursor: pointer; }
+  .week-selector select { background: linear-gradient(135deg, var(--pink), #c01248); border: none; color: white; padding: 6px 16px; border-radius: 4px; font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 2px; outline: none; cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; padding-right: 28px; }
   .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 13px; }
   .loading { text-align: center; padding: 60px 20px; color: var(--gold); font-size: 16px; }
   .loading .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid var(--dark3); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 10px; vertical-align: middle; }
@@ -153,8 +153,8 @@
         <div class="panel-header">
           <div><div class="panel-title pink">⚡ Weekly</div><div class="panel-subtitle" id="weekSubtitle">Week 1</div></div>
           <div><select id="weekSelect" onchange="renderWeeklyPanel()" class="week-selector">
-            <option value="1">Week 1 (Apr 1–7)</option><option value="2">Week 2 (Apr 8–14)</option>
-            <option value="3">Week 3 (Apr 15–21)</option><option value="4">Week 4 (Apr 22–30)</option>
+            <option value="1">Week 1 (Apr 6–12)</option><option value="2">Week 2 (Apr 13–19)</option>
+            <option value="3">Week 3 (Apr 20–26)</option><option value="4">Week 4 (Apr 27–30)</option>
           </select></div>
         </div>
         <div id="weeklyLB"><div class="loading"><span class="spinner"></span>Loading...</div></div>
@@ -343,7 +343,7 @@ function renderWeeklyPanel() {
 
 function renderAllWeeks() {
   const grid = document.getElementById('allWeeksGrid');
-  const wd = ['Apr 1–7', 'Apr 8–14', 'Apr 15–21', 'Apr 22–30'];
+  const wd = ['Apr 6–12', 'Apr 13–19', 'Apr 20–26', 'Apr 27–30'];
   grid.innerHTML = [1,2,3,4].map(w => {
     const ranked = getRanked(w);
     const rows = ranked.map((t, i) => {
@@ -377,11 +377,11 @@ function updateStats() {
     document.getElementById('trophyLeader').textContent = `${leader.name} leads with ${leader.score.toLocaleString()} pts`;
     document.getElementById('trophySubtext').textContent = `${leader.location} · Every point counts!`;
   } else {
-    document.getElementById('trophyLeader').textContent = 'Competition begins April 1!';
+    document.getElementById('trophyLeader').textContent = 'Competition begins April 6!';
     document.getElementById('trophySubtext').textContent = 'Update data.xlsx to see standings';
   }
 
-  const now = new Date(), aprilStart = new Date('2026-04-01');
+  const now = new Date(), aprilStart = new Date('2026-04-06');
   const cw = Math.min(4, Math.max(1, Math.floor((now - aprilStart) / (7*24*60*60*1000)) + 1));
   document.getElementById('currentWeekBadge').textContent = `WEEK ${cw}`;
   document.getElementById('weekSelect').value = cw;
